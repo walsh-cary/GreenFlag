@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">Green Flag</string>
+    <string name="green_flag_logo">Green Flag Logo</string>
+    <string name="greenflag_customers_can_create_an_account_to_access">GreenFlag customers can create an account to access</string>
+    <string name="check_mark">Check Mark</string>
+    <string name="car_health_updates">Car health updates</string>
+    <string name="request_a_rescue_online">Request a rescue online</string>
+    <string name="policy_information">Policy information</string>
+    <string name="create_an_account">Create an account</string>
+    <string name="email_address">Email address</string>
+    <string name="create_password">Create password</string>
+    <string name="repeat_password">Repeat password</string>
+    <string name="password_requirements">Your password should have a minimum of 8 characters and contain at least one number, one uppercase and one lowercase letter. You can use special characters.</string>
+    <string name="next">Next</string>
+    <string name="name">Name</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="change_photo">Change photo</string>
+    <string name="age">Age</string>
+    <string name="female">Female</string>
+    <string name="male">Male</string>
+    <string name="save">Save</string>
+
+    <string-array name="countries">
+        <item>United States</item>
+        <item>Canada</item>
+        <item>Mexico</item>
+        <item>United Kingdom</item>
+        <item>France</item>
+        <item>Portugal</item>
+        <item>Germany</item>
+        <item>Italy</item>
+        <item>Other</item>
+    </string-array>
+</resources>

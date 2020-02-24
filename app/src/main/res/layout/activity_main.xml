@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black"
+    tools:context=".MainActivity">
+
+    <!--Display logo-->
+    <ImageView
+        android:id="@+id/iv_gf_logo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginLeft="64dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginRight="64dp"
+        android:contentDescription="@string/green_flag_logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo_green_flag2x" />
+
+    <!--Display midscreen descriptive text and check marks-->
+    <TextView
+        android:id="@+id/tv_gf_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginLeft="64dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginRight="64dp"
+        android:text="@string/greenflag_customers_can_create_an_account_to_access"
+        android:textColor="@android:color/white"
+        android:textSize="21sp"
+        android:typeface="sans"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_gf_logo"
+        app:layout_constraintVertical_bias="0.26" />
+
+    <ImageView
+        android:id="@+id/iv_check_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:contentDescription="@string/check_mark"
+        app:layout_constraintStart_toStartOf="@+id/tv_gf_desc"
+        app:layout_constraintTop_toBottomOf="@+id/tv_gf_desc"
+        app:srcCompat="@drawable/tick2x" />
+    <ImageView
+        android:id="@+id/iv_check_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:contentDescription="@string/check_mark"
+        app:layout_constraintStart_toStartOf="@+id/iv_check_1"
+        app:layout_constraintTop_toBottomOf="@+id/iv_check_1"
+        app:srcCompat="@drawable/tick2x" />
+    <ImageView
+        android:id="@+id/iv_check_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:contentDescription="@string/check_mark"
+        app:layout_constraintStart_toStartOf="@+id/iv_check_2"
+        app:layout_constraintTop_toBottomOf="@+id/iv_check_2"
+        app:srcCompat="@drawable/tick2x" />
+
+    <TextView
+        android:id="@+id/tv_health"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:text="@string/car_health_updates"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@id/iv_check_1"
+        app:layout_constraintStart_toEndOf="@id/iv_check_1"
+        app:layout_constraintTop_toTopOf="@id/iv_check_1" />
+
+    <TextView
+        android:id="@+id/tv_request"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:text="@string/request_a_rescue_online"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@id/iv_check_2"
+        app:layout_constraintStart_toEndOf="@id/iv_check_2"
+        app:layout_constraintTop_toTopOf="@id/iv_check_2" />
+
+    <TextView
+        android:id="@+id/tv_policy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:text="@string/policy_information"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@id/iv_check_3"
+        app:layout_constraintStart_toEndOf="@id/iv_check_3"
+        app:layout_constraintTop_toTopOf="@id/iv_check_3" />
+
+    <!--Display button to create an account-->
+    <Button
+        android:id="@+id/btn_create_account"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/gradient_button_background2x"
+        android:text="@string/create_an_account"
+        android:textAllCaps="false"
+        android:textSize="24sp"
+        android:typeface="sans"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
