@@ -115,11 +115,7 @@
         android:id="@+id/btn_create_account"
         android:layout_width="match_parent"
         android:layout_height="64dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
-        android:layout_marginBottom="32dp"
+        android:layout_margin="15dp"
         android:background="@drawable/gradient_button_background2x"
         android:text="@string/create_an_account"
         android:textAllCaps="false"
@@ -128,5 +124,17 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:id="@+id/btn_existing_account"
+        android:background="@drawable/gradient_button_background2x"
+        android:layout_margin="15dp"
+        app:layout_constraintBottom_toTopOf="@id/btn_create_account"
+        android:text="@string/use_existing_account"
+        android:textAllCaps="false"
+        android:textSize="24sp"
+        android:typeface="sans"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,7 +12,7 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button btnCreateAccount;
+    Button btnCreateAccount, btnExistingAccount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Link button variable to button in layout
         btnCreateAccount = findViewById(R.id.btn_create_account);
+        btnExistingAccount = findViewById(R.id.btn_existing_account);
 
         // Create OnClickListener to launch login screen activity
         btnCreateAccount.setOnClickListener(
@@ -35,6 +36,18 @@ public class MainActivity extends AppCompatActivity {
                         Intent newActivityIntent =
                                 new Intent(MainActivity.this,
                                         LoginActivity.class);
+                        startActivity(newActivityIntent);
+                    }
+                }
+        );
+
+        btnExistingAccount.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent newActivityIntent =
+                                new Intent(MainActivity.this,
+                                        ExistingAccountActivity.class);
                         startActivity(newActivityIntent);
                     }
                 }

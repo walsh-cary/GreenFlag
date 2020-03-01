@@ -20,6 +20,8 @@
     <string name="female">Female</string>
     <string name="male">Male</string>
     <string name="save">Save</string>
+    <string name="use_existing_account">Use existing account</string>
+    <string name="prefer_not_to_answer">Prefer not to answer</string>
 
     <string-array name="countries">
         <item>United States</item>

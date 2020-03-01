@@ -1,7 +1,9 @@
 package com.example.greenflag;
 
 import android.app.DatePickerDialog;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -9,13 +11,18 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.lang.invoke.MethodType;
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.format.DateTimeFormatter;
 
 public class AccountInfoActivity extends AppCompatActivity {
 
@@ -31,6 +38,9 @@ public class AccountInfoActivity extends AppCompatActivity {
     int mDay = today.getDayOfMonth();
     EditText etUsername;
     EditText etPassword;
+    String accountBirthdate;
+    RadioGroup genderSelect;
+    RadioButton selected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +51,7 @@ public class AccountInfoActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         spnCountry = findViewById(R.id.spn_country);
+        genderSelect = findViewById(R.id.rg_gender);
 
         ArrayAdapter<CharSequence> spnAdapter = ArrayAdapter.createFromResource(this,
                 R.array.countries, android.R.layout.simple_spinner_dropdown_item);
@@ -78,6 +89,7 @@ public class AccountInfoActivity extends AppCompatActivity {
                                 Period periodAge = Period.between(birthday, today);
                                 String ageString = String.valueOf(periodAge.getYears());
                                 etAge.setText(ageString);
+                                accountBirthdate = birthday.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
                             }
                         }, mYear, mMonth, mDay);
                 dpBirthdate.show();
@@ -87,14 +99,58 @@ public class AccountInfoActivity extends AppCompatActivity {
         etUsername.setText(intent.getStringExtra("USERNAME"));
         etPassword.setText(intent.getStringExtra("PASSWORD"));
 
+        selected = findViewById(genderSelect.getCheckedRadioButtonId());
+
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(AccountInfoActivity.this, "Data saved!", Toast.LENGTH_LONG).show();
+                saveData(
+                        etUsername.getText().toString(),
+                        spnCountry.getSelectedItem().toString(),
+                        selected.toString(),
+                        accountBirthdate
+                );
                 setResult(RESULT_OK);
                 finish();
             }
         });
 
+    }
+
+    public void saveData(String name, String country, String gender, String age) {
+        AccountsDatabase database = new AccountsDatabase(this);
+        SQLiteDatabase writable = database.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(AccountsTable.ACCOUNTS_NAME, name);
+        contentValues.put(AccountsTable.ACCOUNTS_COUNTRY, country);
+        contentValues.put(AccountsTable.ACCOUNTS_GENDER, gender);
+        contentValues.put(AccountsTable.ACCOUNTS_BIRTHDATE, age);
+
+        writable.insert(
+                AccountsTable.TABLE_NAME,
+                null,
+                contentValues
+        );
+
+        long row = writable.insert(
+                AccountsTable.TABLE_NAME,
+                null,
+                contentValues
+        );
+
+        if (row < 0) {
+            Toast.makeText(
+                    AccountInfoActivity.this,
+                    "Failure",
+                    Toast.LENGTH_SHORT
+            ).show();
+        }
+        else {
+            Toast.makeText(
+                    AccountInfoActivity.this,
+                    "Data saved!",
+                    Toast.LENGTH_LONG
+            ).show();
+        }
     }
 }

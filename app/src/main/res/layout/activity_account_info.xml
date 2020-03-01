@@ -147,7 +147,8 @@
             android:id="@+id/rb_neither"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Prefer not to answer"
+            android:text="@string/prefer_not_to_answer"
+            android:checked="true"
             android:textColor="@android:color/white"
             android:textSize="22sp"
             android:buttonTint="@android:color/white"/>
