@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -25,6 +26,7 @@ import java.time.Period;
 import java.time.format.DateTimeFormatter;
 
 public class AccountInfoActivity extends AppCompatActivity {
+    private static final String TAG = "AccountInfoActivity";
 
     Spinner spnCountry;
     Button btnSave;
@@ -40,7 +42,7 @@ public class AccountInfoActivity extends AppCompatActivity {
     EditText etPassword;
     String accountBirthdate;
     RadioGroup genderSelect;
-    RadioButton selected;
+    String selected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +53,6 @@ public class AccountInfoActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         spnCountry = findViewById(R.id.spn_country);
-        genderSelect = findViewById(R.id.rg_gender);
 
         ArrayAdapter<CharSequence> spnAdapter = ArrayAdapter.createFromResource(this,
                 R.array.countries, android.R.layout.simple_spinner_dropdown_item);
@@ -89,7 +90,7 @@ public class AccountInfoActivity extends AppCompatActivity {
                                 Period periodAge = Period.between(birthday, today);
                                 String ageString = String.valueOf(periodAge.getYears());
                                 etAge.setText(ageString);
-                                accountBirthdate = birthday.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+                                accountBirthdate = birthday.format(DateTimeFormatter.ofPattern("MM-dd-yyyy"));
                             }
                         }, mYear, mMonth, mDay);
                 dpBirthdate.show();
@@ -99,25 +100,41 @@ public class AccountInfoActivity extends AppCompatActivity {
         etUsername.setText(intent.getStringExtra("USERNAME"));
         etPassword.setText(intent.getStringExtra("PASSWORD"));
 
-        selected = findViewById(genderSelect.getCheckedRadioButtonId());
-
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 saveData(
                         etUsername.getText().toString(),
                         spnCountry.getSelectedItem().toString(),
-                        selected.toString(),
+                        selected,
                         accountBirthdate
                 );
                 setResult(RESULT_OK);
                 finish();
             }
         });
+        genderSelect = findViewById(R.id.rg_gender);
+        genderSelect.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId) {
+                    case R.id.rb_male:
+                        selected = "Male";
+                        break;
+                    case R.id.rb_female:
+                        selected = "Female";
+                        break;
+                    case R.id.rb_neither:
+                        selected = "Prefer not to answer";
+                        break;
+                }
+            }
+        });
 
     }
 
     public void saveData(String name, String country, String gender, String age) {
+        Log.d(TAG, "saveData: Executed");
         AccountsDatabase database = new AccountsDatabase(this);
         SQLiteDatabase writable = database.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -125,12 +142,6 @@ public class AccountInfoActivity extends AppCompatActivity {
         contentValues.put(AccountsTable.ACCOUNTS_COUNTRY, country);
         contentValues.put(AccountsTable.ACCOUNTS_GENDER, gender);
         contentValues.put(AccountsTable.ACCOUNTS_BIRTHDATE, age);
-
-        writable.insert(
-                AccountsTable.TABLE_NAME,
-                null,
-                contentValues
-        );
 
         long row = writable.insert(
                 AccountsTable.TABLE_NAME,
